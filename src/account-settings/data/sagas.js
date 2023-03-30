@@ -4,7 +4,6 @@ import {
 
 import { publish } from '@edx/frontend-platform';
 import { getLocale, handleRtl, LOCALE_CHANGED } from '@edx/frontend-platform/i18n';
-import { getAuthenticatedUser } from '@edx/frontend-platform/auth';
 
 // Actions
 import {
@@ -41,11 +40,14 @@ import { saga as thirdPartyAuthSaga } from '../third-party-auth';
 
 // Services
 import {
+  configure,
   getSettings,
   patchSettings,
   getTimeZones,
   getVerifiedNameHistory,
 } from './service';
+
+let getAuthenticatedUser;
 
 export function* handleFetchSettings() {
   try {
@@ -155,7 +157,7 @@ export function* handleFetchTimeZones(action) {
   yield put(fetchTimeZonesSuccess(response, action.payload.country));
 }
 
-export default function* saga() {
+function* sagaGen() {
   yield takeEvery(FETCH_SETTINGS.BASE, handleFetchSettings);
   yield takeEvery(SAVE_SETTINGS.BASE, handleSaveSettings);
   yield takeEvery(SAVE_MULTIPLE_SETTINGS.BASE, handleSaveMultipleSettings);
@@ -167,4 +169,10 @@ export default function* saga() {
     nameChangeSaga(),
     thirdPartyAuthSaga(),
   ]);
+}
+
+export default function saga(_getAuthenticatedUser, _getAuthenticatedHttpClient) {
+  getAuthenticatedUser = _getAuthenticatedUser;
+  configure(_getAuthenticatedHttpClient);
+  return sagaGen;
 }

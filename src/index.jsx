@@ -2,79 +2,55 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 import 'formdata-polyfill';
-import { AppProvider, ErrorPage } from '@edx/frontend-platform/react';
-import {
-  subscribe, initialize, APP_INIT_ERROR, APP_READY, mergeConfig,
-} from '@edx/frontend-platform';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Route, Routes, Outlet } from 'react-router-dom';
 
-import Header from '@edx/frontend-component-header';
-import Footer from '@edx/frontend-component-footer';
-
-import configureStore from './data/configureStore';
-import AccountSettingsPage, { NotFoundPage } from './account-settings';
-import IdVerificationPage from './id-verification';
+import { DynamicModuleLoader } from 'redux-dynamic-modules';
+import AccountSettingsPage from './account-settings/AccountSettingsPage';
+import IdVerificationPage from './id-verification/IdVerificationPage';
 import CoachingConsent from './account-settings/coaching/CoachingConsent';
-import messages from './i18n';
-
-import './index.scss';
-import Head from './head/Head';
+import reduxConfig from './account-settings/data/module';
+import appMessages from './i18n';
 import NotificationCourses from './notification-preferences/NotificationCourses';
 import NotificationPreferences from './notification-preferences/NotificationPreferences';
 
-subscribe(APP_READY, () => {
-  ReactDOM.render(
-    <AppProvider store={configureStore()}>
-      <Head />
-      <Routes>
-        <Route path="/coaching_consent" element={<CoachingConsent />} />
-        <Route element={(
-          <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
-            <Header />
-            <main className="flex-grow-1">
-              <Outlet />
-            </main>
-            <Footer />
-          </div>
-        )}
-        >
-          <Route path="/notifications/:courseId" element={<NotificationPreferences />} />
-          <Route path="/notifications" element={<NotificationCourses />} />
-          <Route path="/id-verification/*" element={<IdVerificationPage />} />
-          <Route path="/" element={<AccountSettingsPage />} />
-          <Route path="/notfound" element={<NotFoundPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </AppProvider>,
-    document.getElementById('root'),
-  );
-});
+// eslint-disable-next-line import/prefer-default-export
+export function setup(piralApi) {
+  piralApi.mergeMessages(appMessages);
 
-subscribe(APP_INIT_ERROR, (error) => {
-  ReactDOM.render(<ErrorPage message={error.message} />, document.getElementById('root'));
-});
+  piralApi.mergeConfig({
+    SUPPORT_URL: process.env.SUPPORT_URL,
+    COACHING_ENABLED: (process.env.COACHING_ENABLED || false),
+    ENABLE_DEMOGRAPHICS_COLLECTION: (process.env.ENABLE_DEMOGRAPHICS_COLLECTION || false),
+    DEMOGRAPHICS_BASE_URL: process.env.DEMOGRAPHICS_BASE_URL,
+    ENABLE_COPPA_COMPLIANCE: (process.env.ENABLE_COPPA_COMPLIANCE || false),
+    ENABLE_DOB_UPDATE: (process.env.ENABLE_DOB_UPDATE || false),
+    MARKETING_EMAILS_OPT_IN: (process.env.MARKETING_EMAILS_OPT_IN || false),
+    PASSWORD_RESET_SUPPORT_LINK: process.env.PASSWORD_RESET_SUPPORT_LINK,
+    LEARNER_FEEDBACK_URL: process.env.LEARNER_FEEDBACK_URL,
+  }, 'Account MFE Config');
 
-initialize({
-  messages,
-  requireAuthenticatedUser: true,
-  hydrateAuthenticatedUser: true,
-  handlers: {
-    config: () => {
-      mergeConfig({
-        SUPPORT_URL: process.env.SUPPORT_URL,
-        COACHING_ENABLED: (process.env.COACHING_ENABLED || false),
-        ENABLE_DEMOGRAPHICS_COLLECTION: (process.env.ENABLE_DEMOGRAPHICS_COLLECTION || false),
-        DEMOGRAPHICS_BASE_URL: process.env.DEMOGRAPHICS_BASE_URL,
-        ENABLE_COPPA_COMPLIANCE: (process.env.ENABLE_COPPA_COMPLIANCE || false),
-        ENABLE_ACCOUNT_DELETION: (process.env.ENABLE_ACCOUNT_DELETION !== 'false'),
-        ENABLE_DOB_UPDATE: (process.env.ENABLE_DOB_UPDATE || false),
-        MARKETING_EMAILS_OPT_IN: (process.env.MARKETING_EMAILS_OPT_IN || false),
-        PASSWORD_RESET_SUPPORT_LINK: process.env.PASSWORD_RESET_SUPPORT_LINK,
-        LEARNER_FEEDBACK_URL: process.env.LEARNER_FEEDBACK_URL,
-      }, 'App loadConfig override handler');
-    },
-  },
-});
+  piralApi.registerPage('/coaching_consent', () => (
+    <DynamicModuleLoader modules={[reduxConfig(piralApi.getAuthenticatedUser, piralApi.getAuthenticatedHttpClient)]}>
+      <CoachingConsent />
+    </DynamicModuleLoader>
+  ));
+  piralApi.registerPage('/account', () => (
+    <DynamicModuleLoader modules={[reduxConfig(piralApi.getAuthenticatedUser, piralApi.getAuthenticatedHttpClient)]}>
+      <AccountSettingsPage />
+    </DynamicModuleLoader>
+  ));
+  piralApi.registerPage('/id-verification', () => (
+    <DynamicModuleLoader modules={[reduxConfig(piralApi.getAuthenticatedUser, piralApi.getAuthenticatedHttpClient)]}>
+      <IdVerificationPage />
+    </DynamicModuleLoader>
+  ));
+  piralApi.registerPage('/notifications/:courseId', () => (
+    <DynamicModuleLoader modules={[reduxConfig(piralApi.getAuthenticatedUser, piralApi.getAuthenticatedHttpClient)]}>
+      <NotificationPreferences />
+    </DynamicModuleLoader>
+  ));
+  piralApi.registerPage('/notifications', () => (
+    <DynamicModuleLoader modules={[reduxConfig(piralApi.getAuthenticatedUser, piralApi.getAuthenticatedHttpClient)]}>
+      <NotificationCourses />
+    </DynamicModuleLoader>
+  ));
+}

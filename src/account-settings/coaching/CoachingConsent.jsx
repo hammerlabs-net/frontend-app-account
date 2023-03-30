@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import get from 'lodash.get';
-import { getAuthenticatedHttpClient, getAuthenticatedUser } from '@edx/frontend-platform/auth';
+import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
 
 import PageLoading from '../PageLoading';
 import CoachingConsentForm from './CoachingConsentForm';
@@ -91,7 +91,7 @@ class CoachingConsent extends React.Component {
   }
 
   async patchUsingCoachingConsentForm(body) {
-    const { userId } = getAuthenticatedUser();
+    const { userId } = this.props.getAuthenticatedUser();
     const requestUrl = `${getConfig().LMS_BASE_URL}/api/coaching/v1/coaching_consent/${userId}/`;
     let formErrors = {};
     const data = await getAuthenticatedHttpClient()
@@ -238,6 +238,7 @@ CoachingConsent.defaultProps = {
 };
 
 CoachingConsent.propTypes = {
+  getAuthenticatedUser: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   loaded: PropTypes.bool,
   formValues: PropTypes.shape({

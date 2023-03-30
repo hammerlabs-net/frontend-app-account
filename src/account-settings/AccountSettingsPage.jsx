@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { AppContext } from '@edx/frontend-platform/react';
 import { getConfig, getQueryParameters } from '@edx/frontend-platform';
 import React from 'react';
@@ -5,7 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import memoize from 'memoize-one';
 import findIndex from 'lodash.findindex';
-import { sendTrackingLogEvent } from '@edx/frontend-platform/analytics';
+// PILET CONVERSION: import { sendTrackingLogEvent } from '@edx/frontend-platform/analytics';
 import {
   injectIntl,
   intlShape,
@@ -77,11 +78,13 @@ class AccountSettingsPage extends React.Component {
     this.props.fetchCourseList();
     this.props.fetchSettings();
     this.props.fetchSiteLanguages(this.props.navigate);
+    /* PILET CONVERSION: this.context is not defined!?
     sendTrackingLogEvent('edx.user.settings.viewed', {
       page: 'account',
       visibility: null,
       user_id: this.context.authenticatedUser.userId,
     });
+    */
   }
 
   componentDidUpdate(prevProps) {
@@ -118,7 +121,9 @@ class AccountSettingsPage extends React.Component {
     return concatTimeZoneOptions;
   });
 
-  getLocalizedOptions = memoize((locale, country) => ({
+  // PILET CONVERSION: This needs to get sorted properly. locale needs to come from context but is not passed correctly
+  // eslint-disable-next-line default-param-last
+  getLocalizedOptions = memoize((locale = 'en', country) => ({
     countryOptions: [{
       value: '',
       label: this.props.intl.formatMessage(messages['account.settings.field.country.options.empty']),
