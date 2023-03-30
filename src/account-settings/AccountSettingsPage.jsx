@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { AppContext } from '@edx/frontend-platform/react';
 import { getConfig, history, getQueryParameters } from '@edx/frontend-platform';
 import React from 'react';
@@ -821,7 +822,7 @@ class AccountSettingsPage extends React.Component {
           <div className="row">
             <div className="col-md-3">
               <JumpNav
-                displayDemographicsLink={this.props.formValues.shouldDisplayDemographicsSection}
+                displayDemographicsLink={false}
               />
             </div>
             <div className="col-md-9">
@@ -952,7 +953,7 @@ AccountSettingsPage.defaultProps = {
   tpaProviders: [],
   isActive: true,
   secondary_email_enabled: false,
-  nameChangeModal: {},
+  nameChangeModal: false,
   verifiedName: null,
   mostRecentVerifiedName: {},
   verifiedNameHistory: [],
