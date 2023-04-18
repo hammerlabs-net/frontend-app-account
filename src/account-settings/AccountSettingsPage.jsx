@@ -822,7 +822,7 @@ class AccountSettingsPage extends React.Component {
           <div className="row">
             <div className="col-md-3">
               <JumpNav
-                displayDemographicsLink={false}
+                displayDemographicsLink={this.props.formValues.shouldDisplayDemographicsSection}
               />
             </div>
             <div className="col-md-9">
@@ -953,7 +953,7 @@ AccountSettingsPage.defaultProps = {
   tpaProviders: [],
   isActive: true,
   secondary_email_enabled: false,
-  nameChangeModal: false,
+  nameChangeModal: {},
   verifiedName: null,
   mostRecentVerifiedName: {},
   verifiedNameHistory: [],
