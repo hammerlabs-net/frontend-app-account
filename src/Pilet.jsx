@@ -3,7 +3,7 @@ import 'regenerator-runtime/runtime';
 
 import 'formdata-polyfill';
 
-import { DynamicModuleLoader } from 'redux-dynamic-modules-react';
+import { DynamicModuleLoader } from 'redux-dynamic-modules';
 import * as React from 'react';
 import AccountSettingsPage from './account-settings/AccountSettingsPage';
 import IdVerificationPage from './id-verification/IdVerificationPage';
