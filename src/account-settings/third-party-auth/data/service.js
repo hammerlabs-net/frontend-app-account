@@ -1,7 +1,11 @@
 import { getConfig } from '@edx/frontend-platform';
-import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
 
 import { handleRequestError } from '../../data/utils';
+
+let getAuthenticatedHttpClient;
+export function configure(_getAuthenticatedHttpClient) {
+  getAuthenticatedHttpClient = _getAuthenticatedHttpClient;
+}
 
 export async function getThirdPartyAuthProviders() {
   const { data } = await getAuthenticatedHttpClient()
