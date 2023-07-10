@@ -1,6 +1,6 @@
 {
   "name": "@edx/frontend-app-account",
-  "version": "1.0.0-semantically-released",
+  "version": "1.0.0-alpha",
   "description": "User account micro-frontend for Open edX",
   "author": "edX",
   "license": "AGPL-3.0",
@@ -40,7 +40,7 @@
     "extends @edx/browserslist-config"
   ],
   "devDependencies": {
-    "@edx/frontend-build": "file:../frontend-build",
+    "@edx/frontend-build": "npm:@hammerlabs-net/frontend-build@1.0.0-alpha",
     "@edx/reactifex": "1.1.0",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "12.1.5",
@@ -97,8 +97,8 @@
   "peerDependencies": {
     "@edx/browserslist-config": "1.1.1",
     "@edx/brand": "npm:@edx/brand-openedx@^1.2.0",
-    "@edx/frontend-platform": "file:../frontend-platform/dist",
-    "@edx/paragon": "file:../paragon",
+    "@edx/frontend-platform": "npm:@hammerlabs-net/frontend-platform@1.0.0-alpha",
+    "@edx/paragon": "npm:@hammerlabs-net/paragon@1.0.0-alpha",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-router": "5.2.1",
