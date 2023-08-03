@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
-import { getConfig } from '@edx/frontend-platform';
 import { sendTrackEvent } from '@edx/frontend-platform/analytics';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 
+import { getConfig } from '../../data/api';
 import { useRedirect } from '../../hooks';
 
 import IdVerificationContext from '../IdVerificationContext';

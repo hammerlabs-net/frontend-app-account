@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { getConfig } from '@edx/frontend-platform';
 import {
   Alert, Hyperlink, Form, Button, Spinner,
 } from '@edx/paragon';
 import { Link, useNavigate } from 'react-router-dom';
 import { injectIntl, intlShape, FormattedMessage } from '@edx/frontend-platform/i18n';
 
+import { getConfig } from '../../data/api';
 import { submitIdVerification } from '../data/service';
 import { useNextPanelSlug } from '../routing-utilities';
 import BasePanel from './BasePanel';

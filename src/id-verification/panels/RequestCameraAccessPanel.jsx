@@ -1,10 +1,10 @@
 import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Bowser from 'bowser';
-import { getConfig } from '@edx/frontend-platform';
 import { sendTrackEvent } from '@edx/frontend-platform/analytics';
 import { injectIntl, intlShape, FormattedMessage } from '@edx/frontend-platform/i18n';
 
+import { getConfig } from '../../data/api';
 import { useRedirect } from '../../hooks';
 import { useNextPanelSlug } from '../routing-utilities';
 import BasePanel from './BasePanel';

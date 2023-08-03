@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Hyperlink } from '@edx/paragon';
 
 // Messages
-import { getConfig } from '@edx/frontend-platform';
+import { getConfig } from '../../data/api';
 import messages from './messages';
 
 // Components

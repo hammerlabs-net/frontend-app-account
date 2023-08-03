@@ -11,10 +11,16 @@ import reduxConfig from './account-settings/data/module';
 import appMessages from './i18n';
 import NotificationCourses from './notification-preferences/NotificationCourses';
 import NotificationPreferences from './notification-preferences/NotificationPreferences';
+import { configure, getConfig } from './data/api';
 
 // eslint-disable-next-line import/prefer-default-export
 export function setup(piralApi) {
+  configure(piralApi);
+
   piralApi.mergeMessages(appMessages);
+
+  // eslint-disable-next-line no-unused-vars
+  const config = getConfig();
 
   piralApi.mergeConfig({
     SUPPORT_URL: process.env.SUPPORT_URL,
@@ -29,27 +35,27 @@ export function setup(piralApi) {
   }, 'Account MFE Config');
 
   piralApi.registerPage('/coaching_consent', () => (
-    <DynamicModuleLoader modules={[reduxConfig(piralApi.getAuthenticatedUser, piralApi.getAuthenticatedHttpClient)]}>
+    <DynamicModuleLoader modules={[reduxConfig()]}>
       <CoachingConsent />
     </DynamicModuleLoader>
   ));
   piralApi.registerPage('/account', () => (
-    <DynamicModuleLoader modules={[reduxConfig(piralApi.getAuthenticatedUser, piralApi.getAuthenticatedHttpClient)]}>
+    <DynamicModuleLoader modules={[reduxConfig()]}>
       <AccountSettingsPage />
     </DynamicModuleLoader>
   ));
   piralApi.registerPage('/id-verification', () => (
-    <DynamicModuleLoader modules={[reduxConfig(piralApi.getAuthenticatedUser, piralApi.getAuthenticatedHttpClient)]}>
+    <DynamicModuleLoader modules={[reduxConfig()]}>
       <IdVerificationPage />
     </DynamicModuleLoader>
   ));
   piralApi.registerPage('/notifications/:courseId', () => (
-    <DynamicModuleLoader modules={[reduxConfig(piralApi.getAuthenticatedUser, piralApi.getAuthenticatedHttpClient)]}>
+    <DynamicModuleLoader modules={[reduxConfig()]}>
       <NotificationPreferences />
     </DynamicModuleLoader>
   ));
   piralApi.registerPage('/notifications', () => (
-    <DynamicModuleLoader modules={[reduxConfig(piralApi.getAuthenticatedUser, piralApi.getAuthenticatedHttpClient)]}>
+    <DynamicModuleLoader modules={[reduxConfig()]}>
       <NotificationCourses />
     </DynamicModuleLoader>
   ));

@@ -1,6 +1,5 @@
-import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
-import { getConfig } from '@edx/frontend-platform';
 import get from 'lodash.get';
+import { getAuthenticatedHttpClient, getConfig } from '../../../data/api';
 
 /**
  * get all settings related to the coaching plugin. Settings used

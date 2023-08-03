@@ -1,6 +1,5 @@
-import { getConfig } from '@edx/frontend-platform';
-import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
 import formurlencoded from 'form-urlencoded';
+import { getAuthenticatedHttpClient, getConfig } from '../../../data/api';
 import { handleRequestError } from '../../data/utils';
 
 /**

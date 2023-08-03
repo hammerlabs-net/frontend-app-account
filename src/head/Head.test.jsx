@@ -2,7 +2,7 @@ import React from 'react';
 import { IntlProvider } from '@edx/frontend-platform/i18n';
 import { Helmet } from 'react-helmet';
 import { mount } from 'enzyme';
-import { getConfig } from '@edx/frontend-platform';
+import { getConfig } from '../data/api';
 import Head from './Head';
 
 describe('Head', () => {

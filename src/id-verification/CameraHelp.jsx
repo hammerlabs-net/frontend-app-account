@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Collapsible } from '@edx/paragon';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 
-import { getConfig } from '@edx/frontend-platform';
+import { getConfig } from '../data/api';
 import messages from './IdVerification.messages';
 
 const CameraHelp = (props) => (

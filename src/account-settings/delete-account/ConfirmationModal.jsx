@@ -8,7 +8,7 @@ import {
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { faExclamationCircle, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getConfig } from '@edx/frontend-platform';
+import { getConfig } from '../../data/api';
 import messages from './messages';
 import Alert from '../Alert';
 import PrintingInstructions from './PrintingInstructions';

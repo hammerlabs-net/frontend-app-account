@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { AppContext } from '@edx/frontend-platform/react';
-import { getConfig, getQueryParameters } from '@edx/frontend-platform';
+import { getQueryParameters } from '@edx/frontend-platform';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -19,6 +19,7 @@ import {
 } from '@edx/paragon';
 import { CheckCircle, Error, WarningFilled } from '@edx/paragon/icons';
 
+import { getConfig } from '../data/api';
 import messages from './AccountSettingsPage.messages';
 import {
   fetchSettings,

@@ -1,4 +1,3 @@
-import { getConfig } from '@edx/frontend-platform';
 import {
   FormattedMessage,
   injectIntl,
@@ -12,6 +11,7 @@ import { connect } from 'react-redux';
 import get from 'lodash.get';
 import isEmpty from 'lodash.isempty';
 import memoize from 'memoize-one';
+import { getConfig } from '../../data/api';
 import { demographicsSectionSelector } from '../data/selectors';
 import EditableSelectField from '../EditableSelectField';
 import Checkboxes from './Checkboxes';

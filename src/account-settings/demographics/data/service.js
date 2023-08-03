@@ -1,12 +1,7 @@
-import { getConfig } from '@edx/frontend-platform';
 import get from 'lodash.get';
 import { convertData, TO, FROM } from './utils';
+import { getAuthenticatedHttpClient, getConfig } from '../../../data/api';
 
-let getAuthenticatedHttpClient;
-
-export function configure(_getAuthenticatedHttpClient) {
-  getAuthenticatedHttpClient = _getAuthenticatedHttpClient;
-}
 /**
  * Utility method that attempts to extract errors from the response of a PATCH request in order to
  * display a warning or otherwise meaningful message to the user.

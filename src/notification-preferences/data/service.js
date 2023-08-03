@@ -1,6 +1,6 @@
-import { getConfig, snakeCaseObject } from '@edx/frontend-platform';
-import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
+import { snakeCaseObject } from '@edx/frontend-platform';
 import snakeCase from 'lodash.snakecase';
+import { getConfig, getAuthenticatedHttpClient } from '../../data/api';
 
 export const getCourseNotificationPreferences = async (courseId) => {
   const url = `${getConfig().LMS_BASE_URL}/api/notifications/configurations/${courseId}`;

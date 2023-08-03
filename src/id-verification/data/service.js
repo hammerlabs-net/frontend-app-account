@@ -1,7 +1,6 @@
 import qs from 'qs';
 
-import { getConfig } from '@edx/frontend-platform';
-import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
+import { getConfig, getAuthenticatedHttpClient } from '../../data/api';
 
 /**
  * Get ID verification status from LMS.

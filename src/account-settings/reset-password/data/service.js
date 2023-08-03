@@ -1,6 +1,5 @@
-import { getConfig } from '@edx/frontend-platform';
-import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
 import formurlencoded from 'form-urlencoded';
+import { getConfig, getAuthenticatedHttpClient } from '../../../data/api';
 import { handleRequestError } from '../../data/utils';
 
 // eslint-disable-next-line import/prefer-default-export

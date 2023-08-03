@@ -3,7 +3,6 @@ import { connect, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { getAuthenticatedUser } from '@edx/frontend-platform/auth';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import {
   ActionRow,
@@ -15,6 +14,7 @@ import {
   StatefulButton,
 } from '@edx/paragon';
 
+import { getAuthenticatedUser } from '../../data/api';
 import { closeForm, saveSettingsReset } from '../data/actions';
 import { nameChangeSelector } from '../data/selectors';
 

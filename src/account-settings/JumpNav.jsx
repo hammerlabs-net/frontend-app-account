@@ -1,4 +1,3 @@
-import { getConfig } from '@edx/frontend-platform';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { breakpoints, useWindowSize, Icon } from '@edx/paragon';
 import { OpenInNew } from '@edx/paragon/icons';
@@ -9,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { NavHashLink } from 'react-router-hash-link';
 import Scrollspy from 'react-scrollspy';
 import { Link } from 'react-router-dom';
+import { getConfig } from '../data/api';
 import messages from './AccountSettingsPage.messages';
 import { selectShowPreferences } from '../notification-preferences/data/selectors';
 

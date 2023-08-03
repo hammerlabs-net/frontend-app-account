@@ -1,23 +1,19 @@
-import { getConfig } from '@edx/frontend-platform';
 import pick from 'lodash.pick';
 import pickBy from 'lodash.pickby';
 import omit from 'lodash.omit';
 import isEmpty from 'lodash.isempty';
 
+import { getAuthenticatedHttpClient, getConfig } from '../../data/api';
 import { handleRequestError, unpackFieldErrors } from './utils';
 import { getThirdPartyAuthProviders } from '../third-party-auth';
-import { configure as configureThirdPartyAuthProviders } from '../third-party-auth/data/service';
 import { postVerifiedNameConfig } from '../certificate-preference/data/service';
 import { getCoachingPreferences, patchCoachingPreferences } from '../coaching/data/service';
 import {
   getDemographics,
   getDemographicsOptions,
   patchDemographics,
-  configure as configureDemographics,
 } from '../demographics/data/service';
 import { DEMOGRAPHICS_FIELDS } from '../demographics/data/utils';
-
-let getAuthenticatedHttpClient;
 
 const SOCIAL_PLATFORMS = [
   { id: 'twitter', key: 'social_link_twitter' },
@@ -78,12 +74,6 @@ function packAccountCommitData(commitData) {
     }
   }
   return packedData;
-}
-
-export function configure(_getAuthenticatedHttpClient) {
-  getAuthenticatedHttpClient = _getAuthenticatedHttpClient;
-  configureDemographics(getAuthenticatedHttpClient);
-  configureThirdPartyAuthProviders(getAuthenticatedHttpClient);
 }
 
 export async function getAccount(username) {
