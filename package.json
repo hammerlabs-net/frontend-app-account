@@ -11,6 +11,8 @@
   "scripts": {
     "build": "pilet build",
     "start": "pilet debug",
+    "package": "pilet package",
+    "publish": "pilet build && pilet package && pilet publish",
     "upgrade": "pilet upgrade",
     "docs": "jsdoc -c jsdoc.json",
     "docs-watch": "nodemon -w src -w docs/template -w README.md -e js,jsx --exec npm run docs",
@@ -27,7 +29,7 @@
     "name": "frontend-app-shell"
   },
   "files": [
-    "/dist"
+    "./dist"
   ],
   "bugs": {
     "url": "https://github.com/openedx/frontend-app-account/issues"
@@ -40,11 +42,6 @@
     "extends @edx/browserslist-config"
   ],
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "1.2.36",
-    "@fortawesome/free-brands-svg-icons": "5.15.4",
-    "@fortawesome/free-regular-svg-icons": "5.15.4",
-    "@fortawesome/free-solid-svg-icons": "5.15.4",
-    "@fortawesome/react-fontawesome": "0.2.0",
     "@tensorflow-models/blazeface": "0.0.7",
     "@tensorflow/tfjs-converter": "3.21.0",
     "@tensorflow/tfjs-core": "3.21.0",
@@ -94,6 +91,11 @@
     "piral-cli-webpack5": "1.0.1"
   },
   "peerDependencies": {
+    "@fortawesome/fontawesome-svg-core": "1.2.36",
+    "@fortawesome/free-brands-svg-icons": "5.15.4",
+    "@fortawesome/free-regular-svg-icons": "5.15.4",
+    "@fortawesome/free-solid-svg-icons": "5.15.4",
+    "@fortawesome/react-fontawesome": "0.2.0",
     "@edx/frontend-platform": "^5.3.0",
     "@edx/browserslist-config": "1.2.0",
     "@edx/paragon": "^21.1.2",
